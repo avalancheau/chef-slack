@@ -36,6 +36,10 @@ Attributes
   </tr>
 </table>
 
+The api key is the last section of the web hook url
+
+https://hooks.slack.com/services/XXXXXXXXXX/YYYYYYYYY/ZZZZZZZZZZZZZZ
+
 LWRP Usage
 -----
 In your `metadata.rb` you need to add `depends 'slack'` and add `include_recipe 'slack'` to your recipe.
