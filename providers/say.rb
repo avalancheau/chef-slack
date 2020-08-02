@@ -4,7 +4,20 @@ end
 
 use_inline_resources
 
+module ShowUrlOnError
+  def say(connection, text="", options={})
+    @connection = connection
+    request      = Net::HTTP::Post.new(service_url)
+    request.body = encode_message(text, options)
+    response     = connection.http_request(request)
+    if response.code != "200"
+      raise Slackr::ServiceError, "#{service_url} - #{response.code} - #{response.body}"
+    end
+  end
+end
+
 action :say do
+  Slackr.include ShowUrlOnError
   slack = Slackr.connect(node.slack.team,node.slack.api_key)
 
   options = {}
